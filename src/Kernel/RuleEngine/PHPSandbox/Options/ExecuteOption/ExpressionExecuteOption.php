@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
+
+namespace Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\Options\ExecuteOption;
+
+use Delightful\FlowExprEngine\SdkInfo;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
+use Delightful\RuleEngineCore\PhpScript\RuleType;
+use Delightful\RuleEngineCore\Standards\Admin\InputType;
+use Delightful\RuleEngineCore\Standards\RuleSessionType;
+
+class ExpressionExecuteOption extends AbstractExecuteOption
+{
+    public function getUri(): string
+    {
+        return SdkInfo::RULE_SERVICE_PROVIDER;
+    }
+
+    public function getInputType(): InputType
+    {
+        return InputType::from(InputType::String);
+    }
+
+    public function getRuleSessionType(): RuleSessionType
+    {
+        return RuleSessionType::from(RuleSessionType::Stateless);
+    }
+
+    public function getRuleExecutionSetProperties(): RuleExecutionSetProperties
+    {
+        $ruleExecutionSetProperties = new RuleExecutionSetProperties();
+        $ruleExecutionSetProperties->setName($this->name);
+        $ruleExecutionSetProperties->setRuleType(RuleType::Expression);
+        return $ruleExecutionSetProperties;
+    }
+}
